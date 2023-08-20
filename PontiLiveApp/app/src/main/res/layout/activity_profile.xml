@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    >
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -28,7 +30,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Accesos a mensajes"
+        />
 
     <ImageButton
         android:id="@+id/mapButton"
@@ -39,7 +43,8 @@
         android:src="@drawable/menu_boton_mapal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Accesos mapa principal"/>
 
     <ImageButton
         android:id="@+id/profileButton"
@@ -51,7 +56,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.851"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Accesos a perfil"/>
 
     <ImageView
         android:id="@+id/configButton"
@@ -64,28 +70,221 @@
         app:srcCompat="@drawable/config" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_button"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        android:id="@+id/imageView2"
+        android:layout_width="137dp"
+        android:layout_height="138dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/perfil_elipse" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="141dp"
-        android:layout_height="31dp"
-        android:text="Pepito Pérez"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Juana Camargo"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_normal"
+        android:text="Comunicación Social"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageButton
+        android:id="@+id/botonNaranja"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Descripcion naranja"
+        app:layout_constraintEnd_toStartOf="@+id/botonBeige"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/perfil_boton_naranja" />
+
+    <ImageButton
+        android:id="@+id/botonBeige"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Descripcion beige"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/botonNaranja"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:srcCompat="@drawable/perfil_boton_beige" />
+
+    <ImageButton
+        android:id="@+id/grupo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Acceder a primer grupo"
+        app:layout_constraintBottom_toTopOf="@+id/grupo3"
+        app:layout_constraintEnd_toStartOf="@+id/grupo2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonBusqueda"
+        app:srcCompat="@drawable/perfil_grupo1" />
+
+    <ImageButton
+        android:id="@+id/grupo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Acceder a segundo grupo"
+        app:layout_constraintBottom_toTopOf="@+id/grupo4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonBusqueda"
+        app:srcCompat="@drawable/perfil_grupo2" />
+
+    <ImageButton
+        android:id="@+id/grupo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="33dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Acceder a tercer grupo"
+        app:layout_constraintEnd_toStartOf="@+id/grupo4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grupo1"
+        app:srcCompat="@drawable/perfil_grupo3" />
+
+    <ImageButton
+        android:id="@+id/grupo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Acceder a cuarto grupo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grupo2"
+        app:srcCompat="@drawable/perfil_grupo3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageButton
+        android:id="@+id/botonBusqueda"
+        android:layout_width="193dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Boton busqueda de grupos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:srcCompat="@drawable/perfil_boton_busqueda" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Mis Grupos"
+        android:textColor="#646363"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/botonBusqueda"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonNaranja"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <ImageButton
+        android:id="@+id/gruposBotonMas"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Boton más de grupos"
+        app:layout_constraintEnd_toStartOf="@+id/gruposBotonConfiguraciones"
+        app:layout_constraintStart_toEndOf="@+id/botonBusqueda"
+        app:layout_constraintTop_toBottomOf="@+id/botonBeige"
+        app:srcCompat="@drawable/perfil_boton_grupos_mas" />
+
+    <ImageButton
+        android:id="@+id/gruposBotonConfiguraciones"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Configuraciones de grupos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gruposBotonMas"
+        app:layout_constraintTop_toBottomOf="@+id/botonBeige"
+        app:srcCompat="@drawable/perfil_boton_grupos_config" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/perfil_imagen" />
+
+    <ImageButton
+        android:id="@+id/perfil_3puntos"
+        android:layout_width="48dp"
+
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Ver más grupos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grupo3"
+        app:srcCompat="@drawable/perfil_3puntos" />
+
+    <TextView
+        android:id="@+id/buscarBarra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Buscar"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/botonBusqueda"
+        app:layout_constraintStart_toStartOf="@+id/botonBusqueda"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
