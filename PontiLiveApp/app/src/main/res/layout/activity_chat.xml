@@ -36,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@id/profileImageView"
-            android:text="PontiGomitas"
+            android:text="Rasta Pasta"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </RelativeLayout>

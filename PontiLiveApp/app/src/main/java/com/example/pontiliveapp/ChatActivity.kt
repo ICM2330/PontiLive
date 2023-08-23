@@ -33,7 +33,7 @@ class ChatActivity : AppCompatActivity() {
 
     fun setListeners(){
         binding.botonBack.setOnClickListener{
-            startActivity(Intent(baseContext, MapActivity::class.java))
+            startActivity(Intent(baseContext, ChatsMenuActivity::class.java))
         }
     }
 

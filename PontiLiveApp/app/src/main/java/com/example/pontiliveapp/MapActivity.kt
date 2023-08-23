@@ -18,7 +18,7 @@ class MapActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.chatButton.setOnClickListener{
-            startActivity(Intent(baseContext, ChatActivity::class.java))
+            startActivity(Intent(baseContext, ChatsMenuActivity::class.java))
         }
 
         binding.profileButton.setOnClickListener{
