@@ -23,7 +23,7 @@ class ChatsMenuActivity : AppCompatActivity() {
         }
 
         binding.chat1.setOnClickListener{
-            startActivity(Intent(baseContext, ChatsMenuActivity::class.java))
+            startActivity(Intent(baseContext, ChatActivity::class.java))
         }
 
 
