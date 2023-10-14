@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChatsMenuActivity">
+    tools:context=".activities.ChatsMenuActivity">
 
 
     <TextView
@@ -19,97 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/arqui"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ArquiDiseño"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatArqui"
-        app:layout_constraintVertical_bias="0.009" />
-
-    <ImageButton
-        android:id="@+id/chatInge"
-        android:layout_width="160dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="252dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/inge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Artes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatArtes" />
-
-    <ImageButton
-        android:id="@+id/chatArtes"
-        android:layout_width="160dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="124dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/artes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/chatArqui"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/chatArca"
-        android:layout_width="161dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="252dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arca"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/chatInge"
-        app:layout_constraintHorizontal_bias="0.29"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/chatArqui"
-        android:layout_width="161dp"
-        android:layout_height="99dp"
-        android:layout_marginBottom="124dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arqui"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Ingeniería"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.618"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatInge" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Arca"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatArca" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -134,17 +43,6 @@
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="@+id/imageView7" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="12dp"
-        android:text="Top chats"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/chatArca"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageButton
         android:id="@+id/Back"
         android:layout_width="67dp"
@@ -155,84 +53,176 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/botonBusqueda2"
-        android:layout_width="192dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="Boton busqueda de grupos"
-        android:src="@drawable/perfil_boton_busqueda"
-        app:layout_constraintBottom_toTopOf="@+id/chatInge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/chat1"
         android:layout_width="345dp"
         android:layout_height="73dp"
-        android:layout_marginBottom="2dp"
+        android:backgroundTint="#bababa"
         android:gravity="top|center"
         android:text="Rasta Pasta"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/chat2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/chat2"
         android:layout_width="345dp"
         android:layout_height="71dp"
+        android:backgroundTint="#bababa"
         android:gravity="top|center"
         android:text="Martin Medina"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/chat3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/chat1" />
 
     <Button
         android:id="@+id/chat3"
         android:layout_width="341dp"
         android:layout_height="73dp"
-        android:layout_marginTop="216dp"
+        android:backgroundTint="#bababa"
+        android:gravity="top|center"
+        android:text="Moisés Quintero"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat2" />
+
+    <Button
+        android:id="@+id/chat"
+        android:layout_width="341dp"
+        android:layout_height="73dp"
+        android:backgroundTint="#bababa"
         android:gravity="top|center"
         android:text="PontiGomitas"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/chat3" />
+
+    <Button
+        android:id="@+id/chat6"
+        android:layout_width="341dp"
+        android:layout_height="73dp"
+        android:backgroundTint="#bababa"
+        android:gravity="top|center"
+        android:text="Decano"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/menuMensajes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat4" />
+
+    <Button
+        android:id="@+id/chat5"
+        android:layout_width="341dp"
+        android:layout_height="73dp"
+        android:backgroundTint="#bababa"
+        android:gravity="top|center"
+        android:text="RainboU"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat" />
+
+    <Button
+        android:id="@+id/chat4"
+        android:layout_width="341dp"
+        android:layout_height="73dp"
+        android:backgroundTint="#bababa"
+        android:gravity="top|center"
+        android:text="Lukas Rodríguez"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat5" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yo: Tienes ositos?"
+        android:text="Moisés: Ya terminaste la app?"
         app:layout_constraintBottom_toBottomOf="@+id/chat3"
         app:layout_constraintEnd_toEndOf="@+id/chat3"
-        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="@+id/chat3"
         app:layout_constraintTop_toBottomOf="@+id/chat2"
+        app:layout_constraintVertical_bias="0.841" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yo: Tienes ositos?"
+        app:layout_constraintBottom_toBottomOf="@+id/chat"
+        app:layout_constraintEnd_toEndOf="@+id/chat"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="@+id/chat"
+        app:layout_constraintTop_toTopOf="@+id/chat"
+        app:layout_constraintVertical_bias="0.833" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yo: Tienes aretes?"
+        app:layout_constraintBottom_toBottomOf="@+id/chat5"
+        app:layout_constraintEnd_toEndOf="@+id/chat5"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="@+id/chat5"
+        app:layout_constraintTop_toTopOf="@+id/chat5"
+        app:layout_constraintVertical_bias="0.722" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lukas: Nos vemos en Compu Móvil"
+        app:layout_constraintBottom_toBottomOf="@+id/chat4"
+        app:layout_constraintEnd_toEndOf="@+id/chat4"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="@+id/chat4"
+        app:layout_constraintTop_toTopOf="@+id/chat4"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yo: No me echen :("
+        app:layout_constraintBottom_toBottomOf="@+id/chat6"
+        app:layout_constraintEnd_toEndOf="@+id/chat6"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toStartOf="@+id/chat6"
+        app:layout_constraintTop_toTopOf="@+id/chat6"
         app:layout_constraintVertical_bias="0.851" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="22dp"
         android:text="Yo: Donde estas?"
         app:layout_constraintBottom_toBottomOf="@+id/chat2"
         app:layout_constraintEnd_toEndOf="@+id/chat2"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/chat1"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.806" />
 
     <ImageButton
         android:id="@+id/mapaa"
@@ -302,9 +292,58 @@
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/chat3"
         app:layout_constraintEnd_toEndOf="@+id/chat3"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="@+id/chat3"
         app:layout_constraintTop_toTopOf="@+id/chat3"
+        app:layout_constraintVertical_bias="0.565"
+        app:srcCompat="@drawable/profile_icon" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat"
+        app:layout_constraintEnd_toEndOf="@+id/chat"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="@+id/chat"
+        app:layout_constraintTop_toTopOf="@+id/chat"
+        app:layout_constraintVertical_bias="0.608"
         app:srcCompat="@drawable/pontigomitas" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat6"
+        app:layout_constraintEnd_toEndOf="@+id/chat6"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="@+id/chat6"
+        app:layout_constraintTop_toTopOf="@+id/chat6"
+        app:layout_constraintVertical_bias="0.652"
+        app:srcCompat="@drawable/profile_icon" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat4"
+        app:layout_constraintEnd_toEndOf="@+id/chat4"
+        app:layout_constraintHorizontal_bias="0.036"
+        app:layout_constraintStart_toStartOf="@+id/chat4"
+        app:layout_constraintTop_toTopOf="@+id/chat4"
+        app:layout_constraintVertical_bias="0.478"
+        app:srcCompat="@drawable/profile_icon" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat5"
+        app:layout_constraintEnd_toEndOf="@+id/chat5"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="@+id/chat5"
+        app:layout_constraintTop_toTopOf="@+id/chat5"
+        app:layout_constraintVertical_bias="0.652"
+        app:srcCompat="@drawable/profile_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
