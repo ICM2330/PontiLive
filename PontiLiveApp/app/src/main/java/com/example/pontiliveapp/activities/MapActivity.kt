@@ -1,4 +1,4 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.Manifest
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
