@@ -1,4 +1,4 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pontiliveapp.R
 import com.example.pontiliveapp.databinding.ActivityChatBinding
-import com.example.pontiliveapp.databinding.ActivityMainBinding
 
 class ChatActivity : AppCompatActivity() {
 
