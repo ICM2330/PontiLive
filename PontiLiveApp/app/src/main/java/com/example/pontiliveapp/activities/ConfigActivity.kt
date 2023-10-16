@@ -1,10 +1,9 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.pontiliveapp.databinding.ActivityConfigBinding
-import com.example.pontiliveapp.databinding.ActivityMapBinding
 
 class ConfigActivity : AppCompatActivity() {
     private lateinit var binding: ActivityConfigBinding

@@ -1,4 +1,4 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.Manifest
 import android.content.Intent
@@ -6,13 +6,16 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pontiliveapp.databinding.ActivityMapBinding
+import com.example.pontiliveapp.dialogs.EmprendimientosListDialogFragment
+import com.example.pontiliveapp.dialogs.InfoDialogFragment
+import com.example.pontiliveapp.dialogs.ListDialogFragment
 import com.example.pontiliveapp.model.Lugar
+import com.example.pontiliveapp.model.getLugarName
 import com.example.pontiliveapp.model.getLugares
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -39,6 +42,8 @@ class MapActivity : AppCompatActivity() {
     lateinit var marker : Marker // Marcador
     lateinit var lugares : List<Lugar> // Base de datos
     lateinit var markers : List<Marker> // Lista de marcadores de los lugares
+    val bundle = Bundle()
+    val fragB = InfoDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,7 @@ class MapActivity : AppCompatActivity() {
         locationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = createLocationRequest()
         locationCallback = createLocationCallBack()
+        val extras = intent.extras
 
         // Verificar si ya se tienen permisos. si se tienen, se inicia la actualizacion de ubicacion.
         startLocationUpdates()
@@ -67,10 +73,15 @@ class MapActivity : AppCompatActivity() {
         // establecer los listeners de los marcadores
         setMarkerListeners()
 
-        // mover la camara a Bogota
+        // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
 
-
+        //Llamado cuando el usuario quiera comenzar una ruta desde el diálogo de un lugar
+        if (extras != null) {
+            val aux = extras.getString("nombre")
+            val lugar = getLugarName(aux!!)
+            comenzarRuta(lugar)
+        }
     }
 
     // metodo onPause
@@ -101,12 +112,8 @@ class MapActivity : AppCompatActivity() {
             setMyLocationMarker()
         }
 
-        binding.pruebaRuta.setOnClickListener{
-            // lanzar un intent a la actividad RouteActivity con el nombre del primer lugar como extra:
-            val intent = Intent(this, RouteActivity::class.java)
-            intent.putExtra("nombre", lugares[0].nombre)
-            startActivity(intent)
-
+        binding.emprendimientos.setOnClickListener {
+            EmprendimientosListDialogFragment().show(supportFragmentManager, "dialog")
         }
 
     }
@@ -216,14 +223,12 @@ class MapActivity : AppCompatActivity() {
     fun setMarkerListeners(){
         for (marker in markers){
             marker.setOnMarkerClickListener { marker, mapView ->
-                val lugar = lugares[markers.indexOf(marker)] // objeto lugar
-                //
-                // AQUI SE LANZA LA ACTIVIDAD DE LA VENTANA EMEGENTE DEL LUGAR
-                //
-                // lanzar un intent a la actividad RouteActivity con el nombre del lugar como extra:
-                // val intent = Intent(this, RouteActivity::class.java)
-                // intent.putExtra("nombre", lugar.nombre)
-                // startActivity(intent)
+                val lugar = lugares[markers.indexOf(marker)]
+                Toast.makeText(this, lugar.toString(), Toast.LENGTH_SHORT).show()
+                //Log.d("Lugar", "Nombre: ${lugar.nombre}, Latitud: ${lugar.latitud}, Longitud: ${lugar.longitud}")
+                bundle.putString("nombre", lugar.nombre)
+                fragB.arguments = bundle
+                fragB.show(supportFragmentManager, "dialog")
                 true
             }
         }
@@ -243,4 +248,8 @@ class MapActivity : AppCompatActivity() {
         setMarkerListeners()
     }
 
+    //Función que crea la ruta desde la posición actual del usuario hasta el lugar recibido
+    fun comenzarRuta(lugar: Lugar){
+        //Implementar rutas
+    }
 }
