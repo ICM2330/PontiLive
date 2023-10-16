@@ -11,7 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.pontiliveapp.databinding.ActivityMapBinding
+import com.example.pontiliveapp.dialogs.EmprendimientosListDialogFragment
+import com.example.pontiliveapp.dialogs.InfoDialogFragment
+import com.example.pontiliveapp.dialogs.ListDialogFragment
 import com.example.pontiliveapp.model.Lugar
+import com.example.pontiliveapp.model.getLugarName
 import com.example.pontiliveapp.model.getLugares
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -38,6 +42,8 @@ class MapActivity : AppCompatActivity() {
     lateinit var marker : Marker // Marcador
     lateinit var lugares : List<Lugar> // Base de datos
     lateinit var markers : List<Marker> // Lista de marcadores de los lugares
+    val bundle = Bundle()
+    val fragB = InfoDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +52,7 @@ class MapActivity : AppCompatActivity() {
         locationClient = LocationServices.getFusedLocationProviderClient(this)
         locationRequest = createLocationRequest()
         locationCallback = createLocationCallBack()
+        val extras = intent.extras
 
         // Verificar si ya se tienen permisos. si se tienen, se inicia la actualizacion de ubicacion.
         startLocationUpdates()
@@ -65,10 +72,15 @@ class MapActivity : AppCompatActivity() {
         // establecer los listeners de los marcadores
         setMarkerListeners()
 
-        // mover la camara a Bogota
+        // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
 
-
+        //Llamado cuando el usuario quiera comenzar una ruta desde el diálogo de un lugar
+        if (extras != null) {
+            val aux = extras.getString("nombre")
+            val lugar = getLugarName(aux!!)
+            comenzarRuta(lugar)
+        }
     }
 
     // funcion para configurar todos listeners de los botones
@@ -84,6 +96,10 @@ class MapActivity : AppCompatActivity() {
         binding.locationButton.setOnClickListener{
             moveCamera(lastLocation.latitude, lastLocation.longitude)
             setMyLocationMarker()
+        }
+
+        binding.emprendimientos.setOnClickListener {
+            EmprendimientosListDialogFragment().show(supportFragmentManager, "dialog")
         }
 
     }
@@ -195,9 +211,9 @@ class MapActivity : AppCompatActivity() {
                 val lugar = lugares[markers.indexOf(marker)]
                 Toast.makeText(this, lugar.toString(), Toast.LENGTH_SHORT).show()
                 //Log.d("Lugar", "Nombre: ${lugar.nombre}, Latitud: ${lugar.latitud}, Longitud: ${lugar.longitud}")
-                //
-                // AQUI SE LANZA LA ACTIVIDAD DE LA VENTANA EMEGENTE DEL LUGAR
-                //
+                bundle.putString("nombre", lugar.nombre)
+                fragB.arguments = bundle
+                fragB.show(supportFragmentManager, "dialog")
                 true
             }
         }
@@ -217,4 +233,8 @@ class MapActivity : AppCompatActivity() {
         setMarkerListeners()
     }
 
+    //Función que crea la ruta desde la posición actual del usuario hasta el lugar recibido
+    fun comenzarRuta(lugar: Lugar){
+        //Implementar rutas
+    }
 }
