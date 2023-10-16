@@ -34,6 +34,7 @@ class InfoDialogFragment() : DialogFragment() {
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
 
+
         val lugarB = arguments?.getString("nombre")?.let { getLugarName(it) }
 
         binding.lugar.text = lugarB!!.nombre

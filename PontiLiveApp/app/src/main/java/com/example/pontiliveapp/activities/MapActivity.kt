@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -67,7 +68,6 @@ class MapActivity : AppCompatActivity() {
         // configurar el mapa
         setMap()
 
-
         // establecer los marcadores
         setMarkers()
 
@@ -109,7 +109,15 @@ class MapActivity : AppCompatActivity() {
         }
 
         binding.locationButton.setOnClickListener{
-            moveCamera(lastLocation.latitude, lastLocation.longitude)
+            if(map!=null){
+                if(lastLocation!=null){
+                    map.controller.setZoom(18.0)
+                    val latitud = lastLocation.latitude
+                    val longitud = lastLocation.longitude
+                    val geoPoint = GeoPoint(latitud, longitud)
+                    map.controller.animateTo(geoPoint)
+                }
+            }
             setMyLocationMarker()
         }
 
