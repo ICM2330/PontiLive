@@ -51,14 +51,15 @@ class MapActivity : AppCompatActivity() {
         // Verificar si ya se tienen permisos. si se tienen, se inicia la actualizacion de ubicacion.
         startLocationUpdates()
 
+        // crear la base de datos
+        lugares = getLugares()
+
         // configurar los botones
         setButtons()
 
         // configurar el mapa
         setMap()
 
-        // crear la base de datos
-        lugares = getLugares()
 
         // establecer los marcadores
         setMarkers()
@@ -70,6 +71,19 @@ class MapActivity : AppCompatActivity() {
         moveCamera(4.61, -74.07)
 
 
+    }
+
+    // metodo onPause
+    override fun onPause() {
+        super.onPause()
+        locationClient.removeLocationUpdates(locationCallback)
+        map.onPause()
+    }
+
+    // metodo onResume
+    override fun onResume() {
+        super.onResume()
+        map.onResume()
     }
 
     // funcion para configurar todos listeners de los botones
@@ -85,6 +99,14 @@ class MapActivity : AppCompatActivity() {
         binding.locationButton.setOnClickListener{
             moveCamera(lastLocation.latitude, lastLocation.longitude)
             setMyLocationMarker()
+        }
+
+        binding.pruebaRuta.setOnClickListener{
+            // lanzar un intent a la actividad RouteActivity con el nombre del primer lugar como extra:
+            val intent = Intent(this, RouteActivity::class.java)
+            intent.putExtra("nombre", lugares[0].nombre)
+            startActivity(intent)
+
         }
 
     }
@@ -172,7 +194,8 @@ class MapActivity : AppCompatActivity() {
 
     // funcion que mueve la camara, dadas la latitud y longitud.
     fun moveCamera(latitude: Double, longitude: Double){
-        map.controller.setCenter(GeoPoint(latitude, longitude))
+        val geoPoint = GeoPoint(latitude, longitude)
+        map.controller.animateTo(geoPoint)
         map.controller.setZoom(18.0)
     }
 
@@ -193,12 +216,14 @@ class MapActivity : AppCompatActivity() {
     fun setMarkerListeners(){
         for (marker in markers){
             marker.setOnMarkerClickListener { marker, mapView ->
-                val lugar = lugares[markers.indexOf(marker)]
-                Toast.makeText(this, lugar.toString(), Toast.LENGTH_SHORT).show()
-                //Log.d("Lugar", "Nombre: ${lugar.nombre}, Latitud: ${lugar.latitud}, Longitud: ${lugar.longitud}")
+                val lugar = lugares[markers.indexOf(marker)] // objeto lugar
                 //
                 // AQUI SE LANZA LA ACTIVIDAD DE LA VENTANA EMEGENTE DEL LUGAR
                 //
+                // lanzar un intent a la actividad RouteActivity con el nombre del lugar como extra:
+                // val intent = Intent(this, RouteActivity::class.java)
+                // intent.putExtra("nombre", lugar.nombre)
+                // startActivity(intent)
                 true
             }
         }
