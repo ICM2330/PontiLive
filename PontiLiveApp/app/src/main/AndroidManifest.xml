@@ -20,14 +20,10 @@
         android:theme="@style/Theme.PontiLiveApp"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".RouteActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatsMenuActivity"
-=======
             android:name=".activities.ChatsMenuActivity"
->>>>>>> 28a6d5cb5d80d7944ca98566be05a7367efacda9
             android:exported="false" />
         <activity
             android:name=".activities.ConfigActivity"

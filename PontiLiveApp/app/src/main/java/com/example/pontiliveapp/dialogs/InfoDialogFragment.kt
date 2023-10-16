@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
+import com.example.pontiliveapp.RouteActivity
 import com.example.pontiliveapp.activities.MapActivity
 import com.example.pontiliveapp.databinding.FragmentInfoDialogBinding
 import com.example.pontiliveapp.model.getLugarName
@@ -44,7 +45,7 @@ class InfoDialogFragment() : DialogFragment() {
 
 
         binding.comenzarRuta.setOnClickListener{
-            val i = Intent(context, MapActivity::class.java)
+            val i = Intent(context, RouteActivity::class.java)
             i.putExtra("nombre",lugarB!!.nombre);
             startActivity(Intent(i))
             dismiss()

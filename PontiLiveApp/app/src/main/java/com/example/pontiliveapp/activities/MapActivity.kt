@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.pontiliveapp.RouteActivity
 import com.example.pontiliveapp.databinding.ActivityMapBinding
 import com.example.pontiliveapp.dialogs.EmprendimientosListDialogFragment
 import com.example.pontiliveapp.dialogs.InfoDialogFragment
@@ -224,8 +225,6 @@ class MapActivity : AppCompatActivity() {
         for (marker in markers){
             marker.setOnMarkerClickListener { marker, mapView ->
                 val lugar = lugares[markers.indexOf(marker)]
-                Toast.makeText(this, lugar.toString(), Toast.LENGTH_SHORT).show()
-                //Log.d("Lugar", "Nombre: ${lugar.nombre}, Latitud: ${lugar.latitud}, Longitud: ${lugar.longitud}")
                 bundle.putString("nombre", lugar.nombre)
                 fragB.arguments = bundle
                 fragB.show(supportFragmentManager, "dialog")
