@@ -1,9 +1,8 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewbinding.ViewBinding
 import com.example.pontiliveapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
