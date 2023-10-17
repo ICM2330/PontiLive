@@ -1,4 +1,4 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.os.StrictMode
-import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.pontiliveapp.databinding.ActivityRouteBinding
 import com.example.pontiliveapp.model.Lugar
