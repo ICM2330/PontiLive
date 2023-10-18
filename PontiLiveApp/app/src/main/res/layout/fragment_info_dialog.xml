@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/black">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ccTrip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="0dp"
+        android:background="?attr/colorOnPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+
+            <TextView
+                android:id="@+id/lugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingeniería"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imagen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/comenzarRuta"
+                android:layout_width="253dp"
+                android:layout_height="51dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="4dp"
+                android:backgroundTint="#468b97"
+                android:padding="4dp"
+                android:paddingVertical="16dp"
+                android:text="Comenzar ruta"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:visibility="visible"
+                app:cornerRadius="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/distancia" />
+
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="376dp"
+                android:layout_height="215dp"
+                android:src="@drawable/inge"
+                app:layout_constraintBottom_toTopOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.542"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lugar" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:text="Espacio:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagen" />
+
+            <TextView
+                android:id="@+id/espacio"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:text="Estudiadero"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView15"
+                app:layout_constraintStart_toStartOf="@+id/poblacion"
+                app:layout_constraintTop_toBottomOf="@+id/imagen"
+                app:layout_constraintVertical_bias="0.484" />
+
+            <TextView
+                android:id="@+id/poblacion"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="32dp"
+                android:text="73 personas"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/espacio" />
+
+            <TextView
+                android:id="@+id/distancia"
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:text="0.5 km"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/comenzarRuta"
+                app:layout_constraintStart_toStartOf="@+id/poblacion"
+                app:layout_constraintTop_toBottomOf="@+id/poblacion" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:text="Población actual:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:text="Distancia actual:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/comenzarRuta"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
