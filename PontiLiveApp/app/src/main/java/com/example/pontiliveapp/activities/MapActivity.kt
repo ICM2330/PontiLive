@@ -33,6 +33,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.TilesOverlay
 
 
 class MapActivity : AppCompatActivity(), SensorEventListener {
@@ -80,6 +81,12 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
         // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
 
+
+        //Variables para sensor luz
+        sensorLightManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorLightManager.getDefaultSensor(Sensor.TYPE_LIGHT)!!
+        lightEventListener = createLightSensorListener()
+
         // variables para usar el barometro
 
         pressureTextView = binding.PressureTv
@@ -94,6 +101,7 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
         super.onPause()
         locationClient.removeLocationUpdates(locationCallback)
         sensorManager?.unregisterListener(this)
+        sensorLightManager.unregisterListener(lightEventListener)
         map.onPause()
     }
 
@@ -102,6 +110,10 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
         super.onResume()
         map.onResume()
         sensorManager?.registerListener(this, barometerSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorLightManager.registerListener(
+            lightEventListener, lightSensor,
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
     }
 
     // funcion para configurar todos listeners de los botones
@@ -279,6 +291,34 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         
+    }
+
+    ////////Sensor Luz//////////
+    // Variables de sensor
+    private lateinit var sensorLightManager: SensorManager
+    private lateinit var lightSensor: Sensor
+    private lateinit var lightEventListener: SensorEventListener
+
+    fun createLightSensorListener(): SensorEventListener {
+        val ret: SensorEventListener = object : SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent?) {
+                if (map != null) {
+                    if (event != null) {
+                        if (event.values[0] < 5000) {
+                            // Modo oscuro
+                            map.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
+                        } else {
+                            // Modo claro
+                            map.overlayManager.tilesOverlay.setColorFilter(null)
+                        }
+                    }
+                }
+            }
+
+            override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+            }
+        }
+        return ret
     }
 
 
