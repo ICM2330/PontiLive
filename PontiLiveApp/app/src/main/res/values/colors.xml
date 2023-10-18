@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="chatBarraSuperior">#468B97</color>
+    <color name="letraInput">#646363</color>
+    <color name="azulApp">#468B97</color>
+    <color name="naranjaApp">#F3AA60</color>
 </resources>

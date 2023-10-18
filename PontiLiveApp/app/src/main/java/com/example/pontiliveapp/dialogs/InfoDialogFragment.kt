@@ -8,8 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
-import com.example.pontiliveapp.RouteActivity
-import com.example.pontiliveapp.activities.MapActivity
+import com.example.pontiliveapp.activities.RouteActivity
 import com.example.pontiliveapp.databinding.FragmentInfoDialogBinding
 import com.example.pontiliveapp.model.getLugarName
 

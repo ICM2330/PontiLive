@@ -10,11 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.pontiliveapp.RouteActivity
 import com.example.pontiliveapp.databinding.ActivityMapBinding
 import com.example.pontiliveapp.dialogs.EmprendimientosListDialogFragment
 import com.example.pontiliveapp.dialogs.InfoDialogFragment
-import com.example.pontiliveapp.dialogs.ListDialogFragment
 import com.example.pontiliveapp.model.Lugar
 import com.example.pontiliveapp.model.getLugarName
 import com.example.pontiliveapp.model.getLugares
@@ -24,7 +22,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint

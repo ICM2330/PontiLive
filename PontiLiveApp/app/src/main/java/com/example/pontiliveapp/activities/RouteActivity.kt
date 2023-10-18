@@ -1,4 +1,4 @@
-package com.example.pontiliveapp
+package com.example.pontiliveapp.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
