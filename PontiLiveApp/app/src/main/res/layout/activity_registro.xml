@@ -60,6 +60,7 @@
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:hint="Contraseña"
+        android:inputType="textPassword"
         android:textColor="@color/letraInput"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +120,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

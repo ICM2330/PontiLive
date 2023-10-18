@@ -47,6 +47,7 @@
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:hint="Contraseña"
+        android:inputType="textPassword"
         android:textColor="@color/letraInput"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
