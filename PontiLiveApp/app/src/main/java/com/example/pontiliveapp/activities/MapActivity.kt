@@ -3,9 +3,14 @@ package com.example.pontiliveapp.activities
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,6 +27,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -29,7 +35,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
 
-class MapActivity : AppCompatActivity() {
+class MapActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var binding: ActivityMapBinding
     private val permisosUbicacionRequestCode = 123 // Identificador único para la solicitud de permisos
@@ -74,12 +80,20 @@ class MapActivity : AppCompatActivity() {
         // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
 
+        // variables para usar el barometro
+
+        pressureTextView = binding.PressureTv
+        circularProgressBar = binding.circularProgressBar
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        barometerSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_PRESSURE)
+
     }
 
     // metodo onPause
     override fun onPause() {
         super.onPause()
         locationClient.removeLocationUpdates(locationCallback)
+        sensorManager?.unregisterListener(this)
         map.onPause()
     }
 
@@ -87,6 +101,7 @@ class MapActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         map.onResume()
+        sensorManager?.registerListener(this, barometerSensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     // funcion para configurar todos listeners de los botones
@@ -245,5 +260,26 @@ class MapActivity : AppCompatActivity() {
         }
         setMarkerListeners()
     }
+
+    ////////////////////Barometro//////////////////
+    private var sensorManager: SensorManager?= null
+    private var barometerSensor: Sensor?= null
+    private var pressureTextView: TextView?= null
+    private var circularProgressBar: CircularProgressBar?= null
+
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if(event?.sensor?.type == Sensor.TYPE_PRESSURE){
+            val pressureValue = event.values[0]
+            pressureTextView!!.text = "Pressure: $pressureValue hPa"
+            val maxPressure = 1030f
+            circularProgressBar?.progress = (pressureValue / maxPressure)*1000
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        
+    }
+
 
 }
