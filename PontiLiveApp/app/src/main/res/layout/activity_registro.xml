@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.RegistroActivity">
+
+    <ImageButton
+        android:id="@+id/backButtonR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:srcCompat="@drawable/arrow" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -13,20 +25,20 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="60dp"
-        android:background="@drawable/logo_redondeado"
+        android:background="@drawable/logo_redondeado2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_app" />
 
     <EditText
-        android:id="@+id/inputUsuario"
+        android:id="@+id/inputUsuarioR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/fondo_input_azul"
+        android:background="@drawable/fondo_input"
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:hint="Usuario"
@@ -36,14 +48,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
+
     <EditText
-        android:id="@+id/inputContrasena"
+        android:id="@+id/inputContraseñaR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/fondo_input_azul"
+        android:background="@drawable/fondo_input"
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:hint="Contraseña"
@@ -51,42 +64,49 @@
         android:textColor="@color/letraInput"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNombreR" />
 
-    <Button
-        android:id="@+id/botonIniciarSesion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Iniciar Sesión"
-        android:backgroundTint="@color/azulApp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputContrasena" />
-
-
-    <TextView
-        android:id="@+id/textView18"
-
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/inputContraseñaConfirmaRr"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="¿No tienes cuenta?"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/botonRegistrarse"
+        android:background="@drawable/fondo_input"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:hint="Confirmar Contraseña"
+        android:textColor="@color/letraInput"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputContraseñaR" />
+
+
+    <EditText
+        android:id="@+id/inputNombreR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/fondo_input"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:hint="Nombre"
+        android:textColor="@color/letraInput"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputUsuarioR" />
+
 
     <Button
-        android:id="@+id/botonRegistrarse"
+        android:id="@+id/botonRegistrarseR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -100,5 +120,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
