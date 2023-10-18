@@ -74,12 +74,6 @@ class MapActivity : AppCompatActivity() {
         // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
 
-        //Llamado cuando el usuario quiera comenzar una ruta desde el diálogo de un lugar
-        if (extras != null) {
-            val aux = extras.getString("nombre")
-            val lugar = getLugarName(aux!!)
-            comenzarRuta(lugar)
-        }
     }
 
     // metodo onPause
@@ -252,8 +246,4 @@ class MapActivity : AppCompatActivity() {
         setMarkerListeners()
     }
 
-    //Función que crea la ruta desde la posición actual del usuario hasta el lugar recibido
-    fun comenzarRuta(lugar: Lugar){
-        //Implementar rutas
-    }
 }
