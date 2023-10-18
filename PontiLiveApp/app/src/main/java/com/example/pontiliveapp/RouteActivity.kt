@@ -4,13 +4,12 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.os.StrictMode
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.pontiliveapp.databinding.ActivityRouteBinding
 import com.example.pontiliveapp.model.Lugar
@@ -21,6 +20,8 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import org.json.JSONArray
+import org.json.JSONObject
 import org.osmdroid.bonuspack.routing.OSRMRoadManager
 import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
@@ -29,6 +30,11 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.io.Writer
+import java.util.Date
 
 
 class RouteActivity : AppCompatActivity() {
@@ -47,7 +53,7 @@ class RouteActivity : AppCompatActivity() {
     private var distancia : TextView? = null
     private var tiempoRestante : TextView? = null
     private var bandera = true
-
+    private var jsonArray: JSONArray = JSONArray()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,6 +156,7 @@ class RouteActivity : AppCompatActivity() {
                 super.onLocationResult(result)
                 if(result!=null){
                     lastLocation = result.lastLocation!!
+                    addLocation(lastLocation)
                     if(map!=null){
                         if(destino!=null){
                             // limbia el mapa, crea los dos marcadores y centra el mapa en la ubicacion del usuario
@@ -206,5 +213,32 @@ class RouteActivity : AppCompatActivity() {
             arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
             permisosUbicacionRequestCode
         )
+    }
+
+    //funcion que añade una ubicacion a un archivo json con nombre historial.json
+    fun addLocation(location: Location) {
+
+        val jsonObj = JSONObject()
+        try {
+            jsonObj.put("latitud", location.latitude)
+            jsonObj.put("longitud", location.longitude)
+            val fecha = Date(location.time).toString()
+            jsonObj.put("fecha", fecha)
+            jsonArray.put(jsonObj)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        var output: Writer? = null
+        val filename = "historial.json"
+        try {
+            val file = File(baseContext.getExternalFilesDir(null), filename)
+            output = BufferedWriter(FileWriter(file))
+            output.write(jsonArray.toString())
+            output.close()
+            //imprime un toast con la ubicion del archivo
+            Toast.makeText(this, "Ubicación guardada en: " + file.toString(), Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
