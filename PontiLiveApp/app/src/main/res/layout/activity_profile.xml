@@ -75,27 +75,27 @@
         android:layout_height="138dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/nombreUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/perfil_elipse" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_medium"
         android:text="Juana Camargo"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/descripcionUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/descripcionUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_normal"
@@ -105,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@+id/botonNaranja"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreUsuario" />
 
     <ImageButton
         android:id="@+id/botonNaranja"
@@ -116,7 +116,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toStartOf="@+id/botonBeige"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionUsuario"
         app:srcCompat="@drawable/perfil_boton_naranja" />
 
     <ImageButton
@@ -128,7 +128,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/botonNaranja"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/descripcionUsuario"
         app:srcCompat="@drawable/perfil_boton_beige" />
 
     <ImageButton
@@ -203,15 +203,17 @@
         app:layout_constraintTop_toBottomOf="@+id/botonNaranja" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imagenUsuario"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.71"
-        app:srcCompat="@drawable/perfil_imagen" />
+        android:background="@drawable/circular_background"
+        app:srcCompat="@drawable/logo_app" />
 
     <ImageButton
         android:id="@+id/morePlaces"
@@ -224,5 +226,31 @@
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/arqui" />
+
+    <TextView
+        android:id="@+id/personalizable1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="15sp"
+        android:fontFamily="@font/opensans_bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/botonNaranja"
+        app:layout_constraintEnd_toEndOf="@+id/botonNaranja"
+        app:layout_constraintStart_toStartOf="@+id/botonNaranja"
+        app:layout_constraintTop_toTopOf="@+id/botonNaranja" />
+
+    <TextView
+        android:id="@+id/personalizable2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="15sp"
+        android:fontFamily="@font/opensans_bold"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/botonBeige"
+        app:layout_constraintEnd_toEndOf="@+id/botonBeige"
+        app:layout_constraintStart_toStartOf="@+id/botonBeige"
+        app:layout_constraintTop_toTopOf="@+id/botonBeige" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
