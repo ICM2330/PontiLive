@@ -102,7 +102,7 @@ class ChatActivity : AppCompatActivity() {
 
         mensajeParse.saveInBackground{e ->
             if (e == null){
-                Log.i("PARSE", "Evento guardado con éxito en PARSE")
+                Log.i("PARSE", "Mensaje guardado con éxito en PARSE")
             } else {
                 Log.e("PARSE", "Error al guardar: "+e.localizedMessage)
             }
@@ -189,7 +189,9 @@ class ChatActivity : AppCompatActivity() {
                 val receptor = mensaje.getString("receptor")
                 val contenidoMensaje = mensaje.getString("contenidoMensaje")
 
-                addMessageToChat(contenidoMensaje)
+                runOnUiThread {
+                    addMessageToChat(contenidoMensaje)
+                }
             }
         }
     }
