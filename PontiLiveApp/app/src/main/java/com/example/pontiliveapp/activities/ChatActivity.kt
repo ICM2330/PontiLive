@@ -90,8 +90,9 @@ class ChatActivity : AppCompatActivity() {
 
     fun subirMensajeParse (message: String){
         val currentUser = ParseUser.getCurrentUser()
+        val objectIdPropio= currentUser.objectId
         val mensajeParse = ParseObject("mensaje")
-        mensajeParse.put("emisor",currentUser)
+        mensajeParse.put("emisor",objectIdPropio)
         mensajeParse.put("receptor",idChatContrario)
         mensajeParse.put("contenidoMensaje",message)
 
@@ -136,15 +137,17 @@ class ChatActivity : AppCompatActivity() {
 
     private fun loadExistingMessages() {
         val currentUser = ParseUser.getCurrentUser()
+        val objectIdPropio= currentUser.objectId
+        println("mi id propio: $objectIdPropio, idReceptor: $idChatContrario")
 
         // Asegúrate de cambiar 'Mensaje' por el nombre de tu clase en Parse
         queryEmisorReceptor = ParseQuery.getQuery("mensaje")
-        queryEmisorReceptor.whereEqualTo("emisor", currentUser)
+        queryEmisorReceptor.whereEqualTo("emisor", objectIdPropio)
         queryEmisorReceptor.whereEqualTo("receptor", idChatContrario)
 
         queryReceptorEmisor = ParseQuery.getQuery("mensaje")
         queryReceptorEmisor.whereEqualTo("emisor", idChatContrario)
-        queryReceptorEmisor.whereEqualTo("receptor", currentUser)
+        queryReceptorEmisor.whereEqualTo("receptor", objectIdPropio)
 
         val combinedQuery = ParseQuery.or(listOf(queryEmisorReceptor, queryReceptorEmisor))
         combinedQuery.orderByAscending("updatedAt")
@@ -156,7 +159,8 @@ class ChatActivity : AppCompatActivity() {
                     val emisor = mensaje.getString("emisor")
                     val receptor = mensaje.getString("receptor")
                     val contenidoMensaje = mensaje.getString("contenidoMensaje")
-                    println("mensaje: $contenidoMensaje,emisor: $emisor, receptor: $receptor")
+                    println("mensaje: $contenidoMensaje,emisor: $objectIdPropio, receptor: $receptor")
+                    println("HOLAAA")
                     addMessageToChat(contenidoMensaje)
 
                 }
