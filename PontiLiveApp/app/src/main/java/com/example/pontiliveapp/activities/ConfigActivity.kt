@@ -1,5 +1,6 @@
 package com.example.pontiliveapp.activities
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -50,20 +51,11 @@ class ConfigActivity : AppCompatActivity() {
         binding = ActivityConfigBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupButtons()
+
         currentUser = ParseUser.getCurrentUser()
 
-        binding.chatButton.setOnClickListener{
-            startActivity(Intent(baseContext, ChatActivity::class.java))
-        }
 
-        binding.profileButton.setOnClickListener{
-            startActivity(Intent(baseContext, ProfileActivity::class.java))
-        }
-
-        binding.backButton.setOnClickListener{
-            startActivity(Intent(baseContext, ProfileActivity::class.java))
-
-        }
 
         binding.mapButton.setOnClickListener{
             startActivity(Intent(baseContext, MapActivity::class.java))
@@ -89,10 +81,45 @@ class ConfigActivity : AppCompatActivity() {
         binding.descripcionConfig.hint = currentUser.getString("descripcion")
         urlImagen = currentUser.getString("urlImagen").toString()
 
+
+
+    }
+
+    private fun setupButtons(){
         binding.profileImageView.setOnClickListener {
             mostrarDialogo()
         }
 
+        binding.chatButton.setOnClickListener{
+            startActivity(Intent(baseContext, ChatActivity::class.java))
+        }
+
+        binding.profileButton.setOnClickListener{
+            startActivity(Intent(baseContext, ProfileActivity::class.java))
+        }
+
+        binding.backButton.setOnClickListener{
+            startActivity(Intent(baseContext, ProfileActivity::class.java))
+
+        }
+
+        binding.logOutButton.setOnClickListener(){
+            logOutApp()
+        }
+
+    }
+
+    private fun logOutApp(){
+        ParseUser.logOut()
+
+        // Borrar el token de las preferencias compartidas
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("sessionToken") // Elimina el token
+        editor.apply()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     fun mostrarDialogo() {
