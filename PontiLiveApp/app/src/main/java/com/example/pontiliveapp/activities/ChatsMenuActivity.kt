@@ -22,8 +22,24 @@ class ChatsMenuActivity : AppCompatActivity() {
         binding = ActivityChatsMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setButtons()
+
         updateUsers()
 
+    }
+
+    fun setButtons(){
+        binding.menuMensajes.setOnClickListener{
+            startActivity(Intent(baseContext, ChatsMenuActivity::class.java))
+        }
+
+        binding.menuMapa.setOnClickListener{
+            startActivity(Intent(baseContext, MapActivity::class.java))
+        }
+
+        binding.menuProfile.setOnClickListener{
+            startActivity(Intent(baseContext, ProfileActivity::class.java))
+        }
     }
 
 

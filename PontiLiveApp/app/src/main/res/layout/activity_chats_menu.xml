@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/mapaa"
+        android:id="@+id/menuMapa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView7" />
 
     <ImageButton
-        android:id="@+id/profilee"
+        android:id="@+id/menuProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
