@@ -50,12 +50,6 @@
             android:name=".activities.RegistroActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ListUsersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SeguimientoActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>

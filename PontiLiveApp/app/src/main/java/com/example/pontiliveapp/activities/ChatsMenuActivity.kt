@@ -9,7 +9,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.pontiliveapp.databinding.ActivityChatsMenuBinding
 import com.example.pontiliveapp.dialogs.InfoDialogFragment
 import com.example.pontiliveapp.model.Usuario
-import com.example.pontiliveapp.adapters.UsersAdapter
+import com.example.taller3.adapters.UsersAdapter
 import com.google.firebase.storage.FirebaseStorage
 import com.parse.ParseUser
 
