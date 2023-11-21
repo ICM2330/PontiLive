@@ -21,6 +21,7 @@ import com.example.pontiliveapp.dialogs.InfoDialogFragment
 import com.example.pontiliveapp.model.Lugar
 import com.example.pontiliveapp.model.getLugarName
 import com.example.pontiliveapp.model.getLugares
+import com.example.pontiliveapp.notifications.sendNotification
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -28,6 +29,11 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.ParseUser
+import com.parse.livequery.ParseLiveQueryClient
+import com.parse.livequery.SubscriptionHandling
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -50,6 +56,9 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
     lateinit var markers : List<Marker> // Lista de marcadores de los lugares
     val bundle = Bundle()
     val fragB = InfoDialogFragment()
+    private lateinit var parseQuery:ParseQuery<ParseObject>
+    private lateinit var parseLiveQueryClient: ParseLiveQueryClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +89,12 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
 
         // mover la camara a Bogotá
         moveCamera(4.61, -74.07)
+
+        //Inicializar cliente Parse
+        initParseLiveQuery()
+
+        //Suscripción mensajes
+        setupSubscription()
 
 
         //Variables para sensor luz
@@ -319,6 +334,33 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
             }
         }
         return ret
+    }
+
+    private fun setupSubscription() {
+        val currentUser = ParseUser.getCurrentUser()
+
+        // Suponiendo que 'emisorId' y 'receptorId' son los valores que tienes guardados en tu actividad
+
+        parseQuery = ParseQuery.getQuery("mensaje")
+        parseQuery.whereEqualTo("receptor", currentUser.objectId)
+
+        // Suscribirse solo a los eventos de creación de nuevos objetos
+        val subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery)
+
+        // Reaccionar a los eventos de creación
+        subscriptionHandling.handleEvent(SubscriptionHandling.Event.CREATE) { _, mensaje ->
+            mensaje?.let {
+                val emisor = mensaje.getString("emisor")
+                val contenidoMensaje = mensaje.getString("contenidoMensaje")
+
+                runOnUiThread {
+                    sendNotification(baseContext,ChatsMenuActivity::class.java,emisor!!,contenidoMensaje!!)
+                }
+            }
+        }
+    }
+    private fun initParseLiveQuery() {
+        parseLiveQueryClient = ParseLiveQueryClient.Factory.getClient()
     }
 
 
