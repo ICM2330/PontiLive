@@ -350,11 +350,9 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
         // Reaccionar a los eventos de creación
         subscriptionHandling.handleEvent(SubscriptionHandling.Event.CREATE) { _, mensaje ->
             mensaje?.let {
-                val emisor = mensaje.getString("emisor")
                 val contenidoMensaje = mensaje.getString("contenidoMensaje")
-
                 runOnUiThread {
-                    sendNotification(baseContext,ChatsMenuActivity::class.java,emisor!!,contenidoMensaje!!)
+                    sendNotification(baseContext,ChatsMenuActivity::class.java,contenidoMensaje!!,"Mensaje")
                 }
             }
         }
