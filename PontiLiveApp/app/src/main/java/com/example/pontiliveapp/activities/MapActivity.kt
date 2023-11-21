@@ -143,6 +143,10 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
             EmprendimientosListDialogFragment().show(supportFragmentManager, "dialog")
         }
 
+        binding.listaPersonas.setOnClickListener {
+            startActivity(Intent(baseContext, ListUsersActivity::class.java))
+        }
+
     }
 
     // funcion para establecer el mapa en la actividad

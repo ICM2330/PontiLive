@@ -1,4 +1,4 @@
-package com.example.taller3.adapters
+package com.example.pontiliveapp.adapters
 
 import android.content.Context
 import android.content.Intent
