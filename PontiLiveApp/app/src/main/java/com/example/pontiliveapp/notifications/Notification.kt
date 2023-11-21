@@ -9,11 +9,12 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.example.pontiliveapp.R
+import com.example.pontiliveapp.activities.ChatsMenuActivity
 
 //Importar función en las clases que requieran mandar una notificación
 //Uso: sendNotification(baseContext,<Clase objetivo al abrir la notificación>::class.java,"Mensaje de ejemplo", "Título de la notificación")
 
-fun sendNotification(context: Context, targetActivity: Class<out AppCompatActivity>, message: String, title: String) {
+fun sendNotification(context: Context, targetActivity: Class<*>, message: String, title: String) {
     val channelId = "channel"
 
     // Crear un NotificationManager
@@ -26,7 +27,7 @@ fun sendNotification(context: Context, targetActivity: Class<out AppCompatActivi
     }
 
     // Crear un intent para abrir la actividad deseada al hacer clic en la notificación
-    val intent = Intent(context, targetActivity::class.java)
+    val intent = Intent(context, targetActivity)
 // Esto evita la creación de múltiples instancias de la actividad
     val pendingIntent = PendingIntent.getActivity(context, 0, intent,
         PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
