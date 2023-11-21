@@ -40,6 +40,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.TilesOverlay
+import java.lang.Math.abs
 
 
 class MapActivity : AppCompatActivity(), SensorEventListener {
@@ -293,16 +294,61 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
     private var barometerSensor: Sensor?= null
     private var pressureTextView: TextView?= null
     private var circularProgressBar: CircularProgressBar?= null
+    private var lastPressure: Float = 0f
+    private val presionAtrio: Float = 1016.0f
+    private val presionQuinto: Float = 1015.4f
+    private val presionOnce: Float = 1014.8f
+    private val presionTerraza:Float=1014.2f
 
 
     override fun onSensorChanged(event: SensorEvent?) {
         if(event?.sensor?.type == Sensor.TYPE_PRESSURE){
             val pressureValue = event.values[0]
-            pressureTextView!!.text = "Pressure: $pressureValue hPa"
+            //si la presión varia en 0.1 se guarda la nueva ultima presión en la bd para hacer el simil de que está subiendo o bajando
+            if (abs(pressureValue - lastPressure) >= 0.1) {
+                lastPressure = pressureValue
+                //guardar en la base de datos el valor lastPressure (este va asociado a cada usuario)
+            }
+
+            ////////////////////////////////////////////////////////
+            //CUANDO EL USUARIO ESTÁ EN INGENIERÍA//////////////////
+            ////////////////////////////////////////////////////////
+            //guardar el punto donde se ubica el edificio de ingeniería
+            val puntoIngenieria = Location("")
+            puntoIngenieria.latitude = 4.627139
+            puntoIngenieria.longitude = -74.064001
+            //calcular la distancia de la ubicación del usuario hasta el punto en ingeniería
+            if(::lastLocation.isInitialized){
+                val distancia = lastLocation.distanceTo(puntoIngenieria)
+                if(distancia <= 30){
+                    //Cuando el usuario está a menos de 30 mts a la rendonda del punto de ingeniería
+                    if(pressureValue <1013.9f){
+                        pressureTextView!!.text = "Estás volando :O"
+                    }else if (pressureValue> 1016.3f){
+                        pressureTextView!!.text = "Estás debajo del suelo :O"
+                    }else  if (abs(pressureValue - presionAtrio) <= 0.3 ){
+                        pressureTextView!!.text = "Estás en: Atrio"
+                    }else  if (abs(pressureValue - presionQuinto) <= 0.3 ){
+                        pressureTextView!!.text = "Estás en: Piso quinto"
+                    }else  if (abs(pressureValue - presionOnce) <= 0.3 ){
+                        pressureTextView!!.text = "Estás en: Piso 11"
+                    }else if (abs(pressureValue - presionTerraza) <= 0.3 ){
+                        pressureTextView!!.text = "Estás en: Terraza"
+                    }else { //ya este ultimo es que no se está recibiendo ningún valor
+                        pressureTextView!!.text = "No tienes barometro"
+                    }
+                }else{ //Cuando está por fuera del edificio de ingeniería
+                    pressureTextView!!.text = "Pressure: $pressureValue hPa"
+                }
+            } else{ //si no se tiene acceso a la ultima ubicación igual se intenta seguir mostrando la presión
+                pressureTextView!!.text = "Pressure: $pressureValue hPa"
+            }
+
+
             val maxPressure = 1030f
             circularProgressBar?.progress = (pressureValue / maxPressure)*1000
+            }
         }
-    }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         
