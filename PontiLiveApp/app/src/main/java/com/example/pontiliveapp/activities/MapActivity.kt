@@ -322,7 +322,15 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
             //si la presión varia en 0.1 se guarda la nueva ultima presión en la bd para hacer el simil de que está subiendo o bajando
             if (abs(pressureValue - lastPressure) >= 0.1) {
                 lastPressure = pressureValue
-                //guardar en la base de datos el valor lastPressure (este va asociado a cada usuario)
+                var userParse = ParseUser.getCurrentUser()
+                userParse.put("presion",lastPressure)
+                userParse.saveInBackground { e ->
+                    if (e == null) {
+                        Log.d("PARSE","Localizacion actualizada a: "+lastLocation.latitude+","+lastLocation.longitude)
+                    } else {
+                        Log.d("PARSE","Error al actualizar Localizacion")
+                    }
+                }
             }
 
             ////////////////////////////////////////////////////////
