@@ -37,7 +37,7 @@ class ListUsersActivity : AppCompatActivity() {
         /*/////////////////////////////////////////////
         revisar esta parte
          */////////////////////////////////////////////
-        query.whereEqualTo("estado", "T")
+
 
         query.findInBackground { userObjects, e ->
             if (e == null) {

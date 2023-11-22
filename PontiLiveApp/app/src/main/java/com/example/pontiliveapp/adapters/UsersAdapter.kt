@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.pontiliveapp.R
 import com.example.pontiliveapp.activities.ChatActivity
+import com.example.pontiliveapp.activities.ChatsMenuActivity
+import com.example.pontiliveapp.activities.SeguimientoActivity
 
 
 import com.example.pontiliveapp.model.Usuario
@@ -43,13 +45,19 @@ class UsersAdapter(context: Context, userList: List<Usuario>) :
 
         // Configura el OnClickListener para el botón
         listItemView?.setOnClickListener {
+            var intent = Intent()
+            if (context is ChatsMenuActivity) {
+                intent = Intent(context, ChatActivity::class.java)
+            }else{
+                intent = Intent(context, SeguimientoActivity::class.java)
+            }
             // Inicia DetailActivity y pasa el objectID como un extra
-            val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra("objectID", usuario?.objectID)
             intent.putExtra("username",usuario?.usuario)
             intent.putExtra("urlImagen",usuario?.urlImagen)
             context.startActivity(intent)
         }
+
 
         return listItemView!!
     }

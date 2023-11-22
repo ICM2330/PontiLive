@@ -10,6 +10,7 @@ import android.hardware.SensorManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -158,6 +159,10 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
             EmprendimientosListDialogFragment().show(supportFragmentManager, "dialog")
         }
 
+        binding.idSeguimiento.setOnClickListener {
+            startActivity(Intent(baseContext, ListUsersActivity::class.java))
+        }
+
     }
 
     // funcion para establecer el mapa en la actividad
@@ -220,6 +225,16 @@ class MapActivity : AppCompatActivity(), SensorEventListener {
                 super.onLocationResult(result)
                 if(result!=null){
                     lastLocation = result.lastLocation!!
+                    var userParse = ParseUser.getCurrentUser()
+                    userParse.put("latitud",lastLocation.latitude)
+                    userParse.put("longitud",lastLocation.longitude)
+                    userParse.saveInBackground { e ->
+                        if (e == null) {
+                            Log.d("PARSE","Localizacion actualizada a: "+lastLocation.latitude+","+lastLocation.longitude)
+                        } else {
+                            Log.d("PARSE","Error al actualizar Localizacion")
+                        }
+                    }
                 }
             }
         }
