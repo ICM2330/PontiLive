@@ -294,7 +294,7 @@ class RouteActivity : AppCompatActivity(), SensorEventListener {
             output.write(jsonArray.toString())
             output.close()
             //imprime un toast con la ubicion del archivo
-            Toast.makeText(this, "Ubicación guardada en: " + file.toString(), Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ubicación guardada en: " + file.toString(), Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }

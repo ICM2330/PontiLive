@@ -77,7 +77,7 @@ class RegistroActivity : AppCompatActivity() {
 
         nombre = binding.inputNombreR.text.toString()
         userRegistro.put("nombre",nombre)
-
+        userRegistro.put("descripcion","PontiFeliz")
         val acl = ParseACL()
         acl.publicReadAccess = true
         userRegistro.acl=acl

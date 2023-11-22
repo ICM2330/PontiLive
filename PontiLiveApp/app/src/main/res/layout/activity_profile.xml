@@ -205,15 +205,14 @@
 
     <ImageView
         android:id="@+id/imagenUsuario"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.71"
-        android:background="@drawable/circular_background"
         app:srcCompat="@drawable/logo_app" />
 
     <ImageButton

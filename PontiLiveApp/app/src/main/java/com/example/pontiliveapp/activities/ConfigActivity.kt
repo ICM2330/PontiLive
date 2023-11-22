@@ -12,18 +12,28 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
 import com.example.pontiliveapp.databinding.ActivityConfigBinding
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.parse.ParseUser
 import java.io.File
 import java.io.FileOutputStream
 
 class ConfigActivity : AppCompatActivity() {
+
+    private lateinit var uriFireBase : Uri
+
+
+    private lateinit var uriUpload : Uri
     private lateinit var binding: ActivityConfigBinding
     val getContentGallery = registerForActivityResult(
         ActivityResultContracts.GetContent(),
         ActivityResultCallback {
             loadImage(it!!)
-            saveImageToInternalStorage(it!!)
+            uriFireBase=it!!
+            uploadFirebaseImage(uriFireBase)
         }
     )
 
@@ -31,7 +41,9 @@ class ConfigActivity : AppCompatActivity() {
         ActivityResultCallback {
             if(it){
                 loadImage(cameraUri)
-                saveImageToInternalStorage(cameraUri)
+
+                uriFireBase=cameraUri
+                uploadFirebaseImage(uriFireBase)
             }
         })
     lateinit var currentUser:ParseUser
@@ -56,14 +68,19 @@ class ConfigActivity : AppCompatActivity() {
         currentUser = ParseUser.getCurrentUser()
 
 
-
-        binding.mapButton.setOnClickListener{
-            startActivity(Intent(baseContext, MapActivity::class.java))
+        binding.Aceptar.setOnClickListener{
             val nombreExtraido = binding.nombreConfig.text.toString()
             val descripcionExtraida = binding.descripcionConfig.text.toString()
 
-            currentUser.put("nombre",nombreExtraido)
-            currentUser.put("descripcion",descripcionExtraida)
+            if (!nombreExtraido.toString().isEmpty()){
+                currentUser.put("nombre",nombreExtraido)
+            }
+
+            if (!descripcionExtraida.toString().isEmpty()){
+                currentUser.put("descripcion",descripcionExtraida)
+            }
+
+
 
             currentUser.saveInBackground { e ->
                 if (e == null) {
@@ -74,8 +91,16 @@ class ConfigActivity : AppCompatActivity() {
                     Log.e("Actualizacion", "Error: ",e)
                 }
             }
+            startActivity(Intent(baseContext, ProfileActivity::class.java))
 
         }
+
+        binding.mapButton.setOnClickListener{
+            startActivity(Intent(baseContext, MapActivity::class.java))
+
+
+        }
+        downloadUserImage(currentUser.objectId)
 
         binding.nombreConfig.hint = currentUser.getString("nombre")
         binding.descripcionConfig.hint = currentUser.getString("descripcion")
@@ -107,6 +132,23 @@ class ConfigActivity : AppCompatActivity() {
             logOutApp()
         }
 
+    }
+    fun downloadUserImage(objectID: String) {
+        val storage = FirebaseStorage.getInstance()
+        val imageRef = storage.reference.child("images/$objectID.png")
+
+        imageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                // Asigna la URI a la variable lateinit
+                uriUpload = uri
+                // Use Glide to load the image
+                Glide.with(this)
+                    .load(uriUpload)
+                    .into(binding.profileImageView)
+            }
+            .addOnFailureListener { exception ->
+                println("Error al descargar la imagen: ${exception.message}")
+            }
     }
 
     private fun logOutApp(){
@@ -155,25 +197,25 @@ class ConfigActivity : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeStream(imageStream)
         binding.profileImageView.setImageBitmap(bitmap)
     }
-    private fun saveImageToInternalStorage(uri: Uri) {
-        val imageStream = contentResolver.openInputStream(uri)
-        val bitmap = BitmapFactory.decodeStream(imageStream)
 
-        // Directorio de almacenamiento interno
-        val directory = File(filesDir, "images")
-        directory.mkdirs()
-
-        // Nombre del archivo para la imagen
+    fun uploadFirebaseImage(uriUpload: Uri) {
+        // Obtén una referencia al lugar donde las fotos serán guardadas
         val currentUser = ParseUser.getCurrentUser()
-        val fileName = currentUser.getString("username")+".jpg"
-        urlImagen= fileName
+        val objectId = currentUser?.objectId
+        val storageRef: StorageReference = FirebaseStorage.getInstance().reference.child("images/${objectId}.png")
 
-        // Ruta completa del archivo
-        val file = File(directory, fileName)
-
-        // Guarda la imagen en el almacenamiento interno
-        val outputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        outputStream.close()
+        // Inicia la carga del archivo
+        storageRef.putFile(uriUpload)
+            .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
+                // La carga fue exitosa, aquí puedes obtener, por ejemplo, la URL de la imagen
+                val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
+                downloadUrl?.addOnSuccessListener { uri ->
+                    println("Imagen cargada con éxito. URL: $uri")
+                }
+            }
+            .addOnFailureListener { exception: Exception ->
+                // La carga falló, maneja el error
+                println("Error al cargar la imagen: ${exception.message}")
+            }
     }
 }

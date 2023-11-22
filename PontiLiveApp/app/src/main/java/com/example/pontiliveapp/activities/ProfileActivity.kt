@@ -2,12 +2,15 @@ package com.example.pontiliveapp.activities
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.example.pontiliveapp.databinding.ActivityProfileBinding
 import com.example.pontiliveapp.dialogs.InfoDialogFragment
 import com.example.pontiliveapp.dialogs.ListDialogFragment
+import com.google.firebase.storage.FirebaseStorage
 import com.parse.ParseUser
 import java.io.File
 
@@ -16,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     val bundle = Bundle()
     val fragB = InfoDialogFragment()
+    private lateinit var uriUpload : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -45,6 +49,10 @@ class ProfileActivity : AppCompatActivity() {
             val bitmap = BitmapFactory.decodeFile(rutaImagenCompleta)
             binding.imagenUsuario.setImageBitmap(bitmap)
         }
+
+        val parseUser = ParseUser.getCurrentUser()
+
+        downloadUserImage(parseUser.objectId)
 
         setListeners()
 
@@ -91,4 +99,25 @@ class ProfileActivity : AppCompatActivity() {
             ListDialogFragment().show(supportFragmentManager, "dialog")
         }
     }
+
+    fun downloadUserImage(objectID: String) {
+        val storage = FirebaseStorage.getInstance()
+        val imageRef = storage.reference.child("images/$objectID.png")
+
+        imageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                // Asigna la URI a la variable lateinit
+                uriUpload = uri
+                // Use Glide to load the image
+                Glide.with(this)
+                    .load(uriUpload)
+                    .into(binding.imagenUsuario)
+            }
+            .addOnFailureListener { exception ->
+                println("Error al descargar la imagen: ${exception.message}")
+            }
+    }
+
+
+
 }
