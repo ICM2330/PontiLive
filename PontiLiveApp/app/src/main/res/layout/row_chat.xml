@@ -31,15 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Martin Medina"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center"
+            />
 
-        <TextView
-            android:fontFamily="sans-serif-medium"
-            android:id="@+id/textMessageRowChat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Yo: ¿Dónde estás?"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
 

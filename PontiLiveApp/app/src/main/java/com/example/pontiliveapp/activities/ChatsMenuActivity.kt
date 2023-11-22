@@ -40,6 +40,10 @@ class ChatsMenuActivity : AppCompatActivity() {
         binding.menuProfile.setOnClickListener{
             startActivity(Intent(baseContext, ProfileActivity::class.java))
         }
+
+        binding.Back.setOnClickListener{
+            onBackPressed()
+        }
     }
 
 

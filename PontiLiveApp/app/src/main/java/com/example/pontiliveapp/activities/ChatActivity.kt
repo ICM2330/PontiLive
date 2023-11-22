@@ -82,7 +82,7 @@ class ChatActivity : AppCompatActivity() {
     fun sendMessage(view: View) {
         val message = messageEditText.text.toString().trim()
         if (message.isNotEmpty()) {
-            addMessageToChat(message)
+            addMessageToChat(message, true)
             messageEditText.text.clear()
             subirMensajeParse(message)
         }
@@ -110,19 +110,39 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun addMessageToChat(message: String?) {
+    private fun addMessageToChat(message: String?, mensajePropio: Boolean) {
+
+
         val messageTextView = TextView(this)
         messageTextView.text = message
 
         // Set text alignment to the right
-        messageTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
+
+        if (mensajePropio){
+            messageTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
+            messageTextView.setBackgroundResource(R.drawable.message_background)
+        }
+        else{
+            messageTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+            messageTextView.setBackgroundResource(R.drawable.message_background2)
+        }
+
 
         // Set layout parameters to align to the right and stack from bottom
         val layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
-        )
+        ).apply {
+            topMargin=16
+            bottomMargin=16
+        }
         layoutParams.gravity = Gravity.END
+        if (mensajePropio){
+            layoutParams.gravity = Gravity.END
+        }
+        else{
+            layoutParams.gravity = Gravity.START
+        }
 
         messageTextView.layoutParams = layoutParams
 
@@ -159,9 +179,15 @@ class ChatActivity : AppCompatActivity() {
                     val emisor = mensaje.getString("emisor")
                     val receptor = mensaje.getString("receptor")
                     val contenidoMensaje = mensaje.getString("contenidoMensaje")
-                    println("mensaje: $contenidoMensaje,emisor: $objectIdPropio, receptor: $receptor")
-                    println("HOLAAA")
-                    addMessageToChat(contenidoMensaje)
+                    println("mensaje: $contenidoMensaje,emisor: $emisor, receptor: $receptor")
+
+                    if (emisor==objectIdPropio){
+                        addMessageToChat(contenidoMensaje,true)
+                    }
+                    else{
+                        addMessageToChat(contenidoMensaje,false)
+                    }
+
 
                 }
             } else {
@@ -172,12 +198,12 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setupSubscription() {
         val currentUser = ParseUser.getCurrentUser()
-
+        val objectIdPropio= currentUser.objectId
         // Suponiendo que 'emisorId' y 'receptorId' son los valores que tienes guardados en tu actividad
 
         parseQuery = ParseQuery.getQuery("mensaje")
         parseQuery.whereEqualTo("emisor", idChatContrario)
-        parseQuery.whereEqualTo("receptor", currentUser.objectId)
+        parseQuery.whereEqualTo("receptor", objectIdPropio)
 
         // Suscribirse solo a los eventos de creación de nuevos objetos
         val subscriptionHandling = parseLiveQueryClient.subscribe(parseQuery)
@@ -188,10 +214,14 @@ class ChatActivity : AppCompatActivity() {
                 val emisor = mensaje.getString("emisor")
                 val receptor = mensaje.getString("receptor")
                 val contenidoMensaje = mensaje.getString("contenidoMensaje")
+                println("mensaje recibido: $contenidoMensaje, de $emisor")
 
-                runOnUiThread {
-                    addMessageToChat(contenidoMensaje)
+                if (emisor!=objectIdPropio){
+                    runOnUiThread {
+                        addMessageToChat(contenidoMensaje,false)
+                    }
                 }
+
             }
         }
     }
